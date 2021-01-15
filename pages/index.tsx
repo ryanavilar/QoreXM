@@ -32,41 +32,6 @@ export default function Home() {
                             <div className="py-4">
                                 <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
                                     <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                    <h1>This new Page needs to be rendered fast please</h1>
                                 </div>
                             </div>
                         </div>
