@@ -1,4 +1,5 @@
 import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
 import 'antd/dist/antd.css';
 import Head from 'next/head';
 import Navbar from '../components/navbar';
