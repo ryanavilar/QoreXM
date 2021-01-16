@@ -1,15 +1,20 @@
 import React from 'react';
-import {useRouter} from 'next/router';
-import {ProjectSchema} from '@feedloop/qore-client';
-import {Spin, Space} from 'antd';
-import qoreContext, {client} from '../qoreContext';
 import useCurrentUser from '../components/auth';
+import List from '../components/list';
 import Loading from '../components/loading';
+import Table from '../components/table';
 import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
-    const currentUser = useCurrentUser();
+    const people = [
+        {id: 1, name: 'Durward Reynolds'},
+        {id: 2, name: 'Kenton Towne'},
+        {id: 3, name: 'Therese Wunsch'},
+        {id: 4, name: 'Benedict Kessler'},
+        {id: 5, name: 'Katelyn Rohan'},
+    ];
 
+    const currentUser = useCurrentUser();
     if (currentUser === undefined) return <Loading />;
 
     return (
@@ -25,96 +30,8 @@ export default function Home() {
                         </div>
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <div className="py-4">
-                                <div>
-                                    <div className="flex flex-col">
-                                        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                            <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                                    <table className="min-w-full divide-y divide-gray-200">
-                                                        <thead className="bg-gray-50">
-                                                            <tr>
-                                                                <th
-                                                                    scope="col"
-                                                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                                >
-                                                                    Name
-                                                                </th>
-                                                                <th
-                                                                    scope="col"
-                                                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                                >
-                                                                    Title
-                                                                </th>
-                                                                <th
-                                                                    scope="col"
-                                                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                                >
-                                                                    Email
-                                                                </th>
-                                                                <th
-                                                                    scope="col"
-                                                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                                >
-                                                                    Role
-                                                                </th>
-                                                                <th scope="col" className="relative px-6 py-3">
-                                                                    <span className="sr-only">Edit</span>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr className="bg-white">
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                                    Jane Cooper
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    Regional Paradigm Technician
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    jane.cooper@example.com
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    Admin
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-indigo-600 hover:text-indigo-900"
-                                                                    >
-                                                                        Edit
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr className="bg-gray-50">
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                                    Cody Fisher
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    Product Directives Officer
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    cody.fisher@example.com
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                    Owner
-                                                                </td>
-                                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                                    <a
-                                                                        href="#"
-                                                                        className="text-indigo-600 hover:text-indigo-900"
-                                                                    >
-                                                                        Edit
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <List label="Choose Brand" data={people} />
+                                <Table />
                             </div>
                         </div>
                     </>

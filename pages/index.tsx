@@ -1,8 +1,4 @@
 import React from 'react';
-import {useRouter} from 'next/router';
-import {ProjectSchema} from '@feedloop/qore-client';
-import {Spin, Space} from 'antd';
-import qoreContext, {client} from '../qoreContext';
 import useCurrentUser from '../components/auth';
 import Loading from '../components/loading';
 import LoggedIn from '../layouts/loggedin';

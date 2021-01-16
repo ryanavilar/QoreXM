@@ -1,7 +1,8 @@
-import {Spin} from 'antd';
+import React from 'react';
 import useCurrentUser from '../components/auth';
 import List from '../components/list';
 import Loading from '../components/loading';
+import Table from '../components/table';
 import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
@@ -32,6 +33,7 @@ export default function Home() {
                             <div className="py-4">
                                 <div>
                                     <List label="Choose Brand" data={people} />
+                                    <Table />
                                 </div>
                             </div>
                         </div>

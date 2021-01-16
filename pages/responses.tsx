@@ -1,12 +1,19 @@
 import React from 'react';
-import {useRouter} from 'next/router';
-import {ProjectSchema} from '@feedloop/qore-client';
-import {Spin, Space} from 'antd';
-import qoreContext, {client} from '../qoreContext';
 import useCurrentUser from '../components/auth';
+import List from '../components/list';
+import Loading from '../components/loading';
+import Table from '../components/table';
 import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
+    const people = [
+        {id: 1, name: 'Durward Reynolds'},
+        {id: 2, name: 'Kenton Towne'},
+        {id: 3, name: 'Therese Wunsch'},
+        {id: 4, name: 'Benedict Kessler'},
+        {id: 5, name: 'Katelyn Rohan'},
+    ];
+
     const currentUser = useCurrentUser();
     if (currentUser === undefined) return <Loading />;
 
@@ -23,9 +30,8 @@ export default function Home() {
                         </div>
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <div className="py-4">
-                                <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
-                                    <h1>This new Page needs to be rendered fast please</h1>
-                                </div>
+                                <List label="Choose Brand" data={people} />
+                                <Table />
                             </div>
                         </div>
                     </>
