@@ -4,18 +4,12 @@ import {ProjectSchema} from '@feedloop/qore-client';
 import {Spin, Space} from 'antd';
 import qoreContext, {client} from '../qoreContext';
 import useCurrentUser from '../components/auth';
+import Loading from '../components/loading';
 import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
     const currentUser = useCurrentUser();
-    if (currentUser === undefined)
-        return (
-            <>
-                <main className="block w-full m-auto">
-                    <Spin className="m-auto" size="large" />
-                </main>
-            </>
-        );
+    if (currentUser === undefined) return <Loading />;
 
     return (
         <>
