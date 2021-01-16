@@ -6,7 +6,6 @@ import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
     const currentUser = useCurrentUser();
-    if (currentUser === undefined) return <Loading />;
 
     return (
         <>

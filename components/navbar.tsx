@@ -1,4 +1,5 @@
 import {Transition} from '@tailwindui/react';
+import {Skeleton} from 'antd';
 import React, {useState} from 'react';
 import qoreContext, {client} from '../qoreContext';
 import {ProjectSchema} from '@feedloop/qore-client';
@@ -153,7 +154,15 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
                                             />
                                         </div>
                                         <div className="ml-3 flex-auto">
-                                            <p className="mb-1 text-base font-medium text-white">{props.user?.name} </p>
+                                            {props.user ? (
+                                                <p className="text-sm font-medium text-white mb-1">
+                                                    {props.user?.name}
+                                                </p>
+                                            ) : (
+                                                <div>
+                                                    <Skeleton.Input className="w-24 h-2" active={true} size={'small'} />
+                                                </div>
+                                            )}
                                             <a
                                                 href="#"
                                                 className="text-sm font-medium text-indigo-200 group-hover:text-white"
@@ -246,7 +255,16 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
                                             />
                                         </div>
                                         <div className="ml-3 flex-auto">
-                                            <p className="text-sm font-medium text-white mb-1">{props.user?.name}</p>
+                                            {props.user ? (
+                                                <p className="text-sm font-medium text-white mb-1">
+                                                    {props.user?.name}
+                                                </p>
+                                            ) : (
+                                                <div>
+                                                    <Skeleton.Input className="w-24 h-2" active={true} size={'small'} />
+                                                </div>
+                                            )}
+
                                             <a
                                                 href="#"
                                                 className="text-xs font-medium text-indigo-200 group-hover:text-white"
