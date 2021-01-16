@@ -4,7 +4,6 @@ import {ProjectSchema} from '@feedloop/qore-client';
 import {Spin, Space} from 'antd';
 import qoreContext, {client} from '../qoreContext';
 import useCurrentUser from '../components/auth';
-import Loading from '../components/loading';
 import LoggedIn from '../layouts/loggedin';
 
 export default function Home() {
@@ -15,7 +14,7 @@ export default function Home() {
         <>
             <LoggedIn
                 title="Qore XM | Dashboard"
-                active="dashboard"
+                active="responses"
                 user={currentUser}
                 content={
                     <>
