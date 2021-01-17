@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext, createContext} from 'react';
+import Cookies from 'js-cookie';
 import {useRouter} from 'next/router';
 import {ProjectSchema} from '@feedloop/qore-client';
 import qoreContext, {client} from '../qoreContext';
@@ -31,6 +32,10 @@ const useCurrentUser = () => {
             });
     }, []);
     return user;
+};
+
+export const LogOut = () => {
+    Cookies.set('token', '', {path: '/'});
 };
 
 export default useCurrentUser;
