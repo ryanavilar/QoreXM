@@ -1,6 +1,5 @@
 import React from 'react';
 import {ProjectSchema} from '@feedloop/qore-client';
-
 import useCurrentUser from '../components/auth';
 import Loading from '../components/loading';
 import Table from '../components/table';
@@ -8,8 +7,9 @@ import ButtonModal from '../components/buttonmodal';
 import LoggedIn from '../layouts/loggedin';
 import {client} from '../qoreContext';
 
-export default function Home() {
-    const [brands, setBrands] = React.useState<ProjectSchema['brandsPerUser']['read'] | undefined>();
+export default function Brand() {
+    const [brands, setBrands] = React.useState<any>();
+    const currentUser = useCurrentUser();
 
     const getBrands = (user: any) => {
         const {endpoint, organizationId, projectId} = client.project.config;
@@ -27,19 +27,17 @@ export default function Home() {
                             url: `/${projectId}/brandsPerUser/rows?user=${user?.id}`,
                             method: 'GET',
                         })
-                        .then((datas) => {
+                        .then((datas) =>
                             setBrands({
                                 fields: fields.data,
                                 datas: datas.data,
-                            });
-                        });
+                            })
+                        );
                 });
         }
 
         return brands;
     };
-
-    const currentUser = useCurrentUser();
 
     React.useEffect(() => {
         getBrands(currentUser);

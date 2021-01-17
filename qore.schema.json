@@ -281,16 +281,6 @@
           "displayField": false
         },
         {
-          "name": "user",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "user",
-          "table": "user",
-          "column": "responses2",
-          "multiple": false,
-          "displayField": false
-        },
-        {
           "name": "ExperienceResponses 1",
           "type": "relation",
           "deletionProtection": false,
@@ -322,16 +312,6 @@
           "displayField": false
         },
         {
-          "name": "user",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "user",
-          "table": "user",
-          "column": "experienceResponses",
-          "multiple": false,
-          "displayField": false
-        },
-        {
           "name": "score",
           "type": "number",
           "deletionProtection": false,
@@ -351,9 +331,9 @@
       ]
     },
     {
-      "name": "User",
+      "name": "Customers",
       "type": null,
-      "id": "user",
+      "id": "customers",
       "fields": [
         {
           "name": "name",
@@ -368,43 +348,23 @@
           "deletionProtection": false,
           "id": "description",
           "displayField": false
-        },
-        {
-          "name": "Responses 2",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "responses2",
-          "table": "responses",
-          "column": "user",
-          "multiple": true,
-          "displayField": false
-        },
-        {
-          "name": "ExperienceResponses",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "experienceResponses",
-          "table": "experienceResponses",
-          "column": "user",
-          "multiple": true,
-          "displayField": false
         }
       ]
     }
   ],
   "roles": [
     {
-      "name": "admin",
-      "isAdmin": true,
-      "isEditor": false,
-      "isPublic": false,
-      "permissions": []
-    },
-    {
       "name": "public",
       "isAdmin": false,
       "isEditor": false,
       "isPublic": true,
+      "permissions": []
+    },
+    {
+      "name": "admin",
+      "isAdmin": true,
+      "isEditor": false,
+      "isPublic": false,
       "permissions": []
     }
   ],
@@ -670,17 +630,6 @@
           "multiple": false,
           "displayField": false,
           "design": null
-        },
-        {
-          "name": "user",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "user",
-          "table": "user",
-          "column": "responses2",
-          "multiple": false,
-          "displayField": false,
-          "design": null
         }
       ],
       "design": null
@@ -709,17 +658,6 @@
           "design": null
         },
         {
-          "name": "user",
-          "type": "relation",
-          "deletionProtection": false,
-          "id": "user",
-          "table": "user",
-          "column": "experienceResponses",
-          "multiple": false,
-          "displayField": false,
-          "design": null
-        },
-        {
           "name": "score",
           "type": "number",
           "deletionProtection": false,
@@ -742,9 +680,57 @@
       "design": null
     },
     {
-      "id": "userDefaultView",
-      "name": "User Default View",
-      "tableId": "user",
+      "id": "brandsPerUser",
+      "name": "Brands Per User",
+      "tableId": "brands",
+      "parameters": [{ "slug": "user", "type": "text", "required": true }],
+      "sorts": [],
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "deletionProtection": false,
+          "id": "name",
+          "displayField": true,
+          "design": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "deletionProtection": false,
+          "id": "description",
+          "displayField": false,
+          "design": null
+        },
+        {
+          "name": "Stores",
+          "type": "relation",
+          "deletionProtection": false,
+          "id": "stores",
+          "table": "stores",
+          "column": "brand",
+          "multiple": true,
+          "displayField": false,
+          "design": null
+        },
+        {
+          "name": "Experiences",
+          "type": "relation",
+          "deletionProtection": false,
+          "id": "experiences",
+          "table": "experiences",
+          "column": "brand",
+          "multiple": true,
+          "displayField": false,
+          "design": null
+        }
+      ],
+      "design": null
+    },
+    {
+      "id": "allCustomers",
+      "name": "All Customers",
+      "tableId": "customers",
       "parameters": [],
       "sorts": [],
       "fields": [

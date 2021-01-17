@@ -58,7 +58,6 @@ declare module "@feedloop/qore-client" {
     description: string;
     form: FormTableRow;
     store: StoreTableRow;
-    user: UserTableRow;
     experienceResponses1: { nodes: ExperienceResponses1TableRow[] };
   };
 
@@ -66,17 +65,14 @@ declare module "@feedloop/qore-client" {
     id: string;
     name: string;
     description: string;
-    user: UserTableRow;
     score: number;
     response: ResponseTableRow;
   };
 
-  type UserTableRow = {
+  type CustomersTableRow = {
     id: string;
     name: string;
     description: string;
-    responses2: { nodes: Responses2TableRow[] };
-    experienceResponses: { nodes: ExperienceResponsesTableRow[] };
   };
 
   type BrandsDefaultViewViewRow = {
@@ -181,14 +177,12 @@ declare module "@feedloop/qore-client" {
       description: string;
       form: FormTableRow;
       store: StoreTableRow;
-      user: UserTableRow;
     };
     write: {
       name: string;
       description: string;
       form: string[];
       store: string[];
-      user: string[];
     };
     params: {};
     actions: {};
@@ -199,14 +193,12 @@ declare module "@feedloop/qore-client" {
       id: string;
       name: string;
       description: string;
-      user: UserTableRow;
       score: number;
       response: ResponseTableRow;
     };
     write: {
       name: string;
       description: string;
-      user: string[];
       score: number;
       response: string[];
     };
@@ -214,7 +206,27 @@ declare module "@feedloop/qore-client" {
     actions: {};
   };
 
-  type UserDefaultViewViewRow = {
+  type BrandsPerUserViewRow = {
+    read: {
+      id: string;
+      name: string;
+      description: string;
+      stores: { nodes: StoresTableRow[] };
+      experiences: { nodes: ExperiencesTableRow[] };
+    };
+    write: {
+      name: string;
+      description: string;
+      stores: string[];
+      experiences: string[];
+    };
+    params: {
+      user: string;
+    };
+    actions: {};
+  };
+
+  type AllCustomersViewRow = {
     read: {
       id: string;
       name: string;
@@ -237,6 +249,7 @@ declare module "@feedloop/qore-client" {
     questionsDefaultView: QuestionsDefaultViewViewRow;
     responsesDefaultView: ResponsesDefaultViewViewRow;
     experienceResponsesDefaultView: ExperienceResponsesDefaultViewViewRow;
-    userDefaultView: UserDefaultViewViewRow;
+    brandsPerUser: BrandsPerUserViewRow;
+    allCustomers: AllCustomersViewRow;
   }
 }
