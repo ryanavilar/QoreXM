@@ -1,4 +1,8 @@
-export default function Table() {
+export default function Table(props: {data: any}) {
+    const fieldsRaw = props.data.fields;
+    const datas = props.data.datas;
+
+    const fields = fieldsRaw.nodes.map((field: any) => field.id);
     return (
         <div className="py-4">
             <div>
@@ -9,71 +13,50 @@ export default function Table() {
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Name
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Title
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Email
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Role
-                                            </th>
-                                            <th scope="col" className="relative px-6 py-3">
-                                                <span className="sr-only">Edit</span>
-                                            </th>
+                                            {fields.map((field: any) => {
+                                                return (
+                                                    <th
+                                                        key={field}
+                                                        scope="col"
+                                                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    >
+                                                        {field}
+                                                    </th>
+                                                );
+                                            })}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr className="bg-white">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                Jane Cooper
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                Regional Paradigm Technician
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                jane.cooper@example.com
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Admin</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr>
-
-                                        <tr className="bg-gray-50">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                Cody Fisher
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                Product Directives Officer
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                cody.fisher@example.com
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Owner</td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                    Edit
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        {datas.nodes.map((data: any) => {
+                                            {
+                                                return (
+                                                    <tr
+                                                        className="group hover:bg-indigo-600 cursor-pointer bg-white"
+                                                        key={data.id}
+                                                    >
+                                                        {fields.map((keyName: any) => {
+                                                            if (typeof data[keyName] == 'string') {
+                                                                return (
+                                                                    <td
+                                                                        key={keyName + data.id}
+                                                                        className="group-hover:text-white px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                                                    >
+                                                                        {data[keyName]}
+                                                                    </td>
+                                                                );
+                                                            } else {
+                                                                return (
+                                                                    <td
+                                                                        key={keyName + data.id}
+                                                                        className="group-hover:text-white px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                                                    ></td>
+                                                                );
+                                                            }
+                                                        })}
+                                                    </tr>
+                                                );
+                                            }
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

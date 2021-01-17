@@ -1,12 +1,18 @@
 import {Transition} from '@tailwindui/react';
-import {Skeleton} from 'antd';
+import {useRouter} from 'next/router';
+import {Skeleton, message} from 'antd';
 import React, {useState} from 'react';
-import qoreContext, {client} from '../qoreContext';
-import {ProjectSchema} from '@feedloop/qore-client';
+import {LogOut} from './auth';
 import {Tooltip} from 'antd';
 
 export default function Navbar(props: {content: React.ReactNode; user: any; active: string}) {
+    const router = useRouter();
     const [isOpened, setMenu] = useState(false);
+    const handleLogOut = () => {
+        LogOut();
+        router.push('/login');
+        message.success('Success Log Out');
+    };
     const listMenu = [
         {
             id: 'dashboard',
@@ -33,13 +39,6 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
             name: 'Customer',
             svgd:
                 'M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-        },
-        {
-            id: 'form',
-            href: '/form',
-            name: 'Form',
-            svgd:
-                'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
         },
         {
             id: 'responses',
@@ -172,8 +171,8 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
                                         </div>
                                         <div className="flex-1">
                                             <Tooltip title="Sign Out">
-                                                <a
-                                                    href="#"
+                                                <button
+                                                    onClick={handleLogOut}
                                                     className="text-white bg-indigo-500 hover:bg-indigo-300 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm rounded-md"
                                                 >
                                                     <svg
@@ -190,7 +189,7 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
                                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                                         />
                                                     </svg>
-                                                </a>
+                                                </button>
                                             </Tooltip>
                                         </div>
                                     </div>
@@ -275,8 +274,8 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
 
                                         <div className="flex-1">
                                             <Tooltip title="Sign Out">
-                                                <a
-                                                    href="#"
+                                                <button
+                                                    onClick={handleLogOut}
                                                     className="text-white bg-indigo-500 hover:bg-indigo-300 hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm rounded-md"
                                                 >
                                                     <svg
@@ -293,7 +292,7 @@ export default function Navbar(props: {content: React.ReactNode; user: any; acti
                                                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                                         />
                                                     </svg>
-                                                </a>
+                                                </button>
                                             </Tooltip>
                                         </div>
                                     </div>
