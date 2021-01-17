@@ -1,14 +1,15 @@
 export default function Table(props: {data?: any}) {
     let datas = [];
     let fields: any[] = [];
+    console.log(datas.length);
 
-    if (Object.keys(props).length !== 0 && props.constructor !== Object) {
+    if (Object.keys(props).length !== 0) {
         const fieldsRaw = props.data.fields;
         datas = props.data.datas.nodes;
         fields = fieldsRaw.nodes.map((field: any) => field.id);
     }
 
-    if (datas.length == 0)
+    if (datas.length == 0) {
         return (
             <div className="py-5">
                 <div className="flex flex-col w-full h-80  border-gray-300 border-dashed border-2">
@@ -20,6 +21,7 @@ export default function Table(props: {data?: any}) {
                 </div>
             </div>
         );
+    }
 
     return (
         <div className="py-4">
