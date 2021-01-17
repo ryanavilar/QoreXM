@@ -1,9 +1,8 @@
 export default function Table(props: {data?: any}) {
     let datas = [];
     let fields: any[] = [];
-    console.log(datas.length);
 
-    if (Object.keys(props).length !== 0) {
+    if (props.data) {
         const fieldsRaw = props.data.fields;
         datas = props.data.datas.nodes;
         fields = fieldsRaw.nodes.map((field: any) => field.id);

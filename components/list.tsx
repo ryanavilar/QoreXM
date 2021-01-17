@@ -1,8 +1,8 @@
 import {useState, Fragment} from 'react';
 import {Listbox} from '@headlessui/react';
 
-export default function List(props: {label: string; data: Array<any>}) {
-    const [selectedData, setSelectedData] = useState(props.data[0]);
+export default function List(props: {label: string; data: any; value: any; display: string}) {
+    const [selectedData, setSelectedData] = useState(props.data.nodes[0]);
 
     return (
         <Listbox value={selectedData} onChange={setSelectedData}>
@@ -40,16 +40,17 @@ export default function List(props: {label: string; data: Array<any>}) {
                     aria-activedescendant="listbox-item-3"
                     className="absolute mt-1 w-full rounded-md bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                 >
-                    {props.data.map((entity: any) => (
+                    {props.data.nodes.map((entity: any) => (
                         /* Use the `active` state to conditionally style the active option. */
                         /* Use the `selected` state to conditionally style the selected option. */
                         <Listbox.Option as={Fragment} key={entity.id} value={entity}>
                             {({active, selected}) => {
-                                selected = selectedData.name === entity.name;
+                                selected = selectedData[props.value] === entity[props.value];
                                 return (
                                     <li
                                         id="listbox-option-0"
                                         role="option"
+                                        value={entity[props.value]}
                                         className={`${
                                             active
                                                 ? 'text-white bg-indigo-600 cursor-default select-none relative py-2 pl-3 pr-9'
@@ -78,7 +79,7 @@ export default function List(props: {label: string; data: Array<any>}) {
                                             </span>
                                         )}
                                         <span className={`${selected ? 'font-bold' : 'font-normal'} block truncate`}>
-                                            {entity.name}
+                                            {entity[props.display]}
                                         </span>
                                     </li>
                                 );
