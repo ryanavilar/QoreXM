@@ -1,8 +1,26 @@
-export default function Table(props: {data: any}) {
-    const fieldsRaw = props.data.fields;
-    const datas = props.data.datas;
+export default function Table(props: {data?: any}) {
+    let datas = [];
+    let fields: any[] = [];
 
-    const fields = fieldsRaw.nodes.map((field: any) => field.id);
+    if (Object.keys(props).length !== 0 && props.constructor !== Object) {
+        const fieldsRaw = props.data.fields;
+        datas = props.data.datas.nodes;
+        fields = fieldsRaw.nodes.map((field: any) => field.id);
+    }
+
+    if (datas.length == 0)
+        return (
+            <div className="py-5">
+                <div className="flex flex-col w-full h-80  border-gray-300 border-dashed border-2">
+                    <div className="m-auto align-middle">
+                        <h2 className="text-xl text-grey-500 flex-initial m-5 text-center align-middle">
+                            No Data In this Table
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        );
+
     return (
         <div className="py-4">
             <div>
@@ -27,7 +45,7 @@ export default function Table(props: {data: any}) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {datas.nodes.map((data: any) => {
+                                        {datas.map((data: any) => {
                                             {
                                                 return (
                                                     <tr
