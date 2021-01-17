@@ -9,40 +9,41 @@ import LoggedIn from '../layouts/loggedin';
 import {client} from '../qoreContext';
 
 export default function Home() {
-    const getBrands = (user: any) => {
-        const [brands, setBrands] = React.useState<ProjectSchema['brandsPerUser']['read'] | undefined>();
+    const [brands, setBrands] = React.useState<ProjectSchema['brandsPerUser']['read'] | undefined>();
 
-        React.useEffect(() => {
-            const {endpoint, organizationId, projectId} = client.project.config;
-            if (user) {
-                client.project.axios
-                    .request<{data: ProjectSchema['brandsPerUser']['read']}>({
-                        baseURL: endpoint,
-                        url: `/${projectId}/brandsPerUser/fields`,
-                        method: 'GET',
-                    })
-                    .then((fields) => {
-                        client.project.axios
-                            .request<{data: ProjectSchema['brandsPerUser']['read']}>({
-                                baseURL: endpoint,
-                                url: `/${projectId}/brandsPerUser/rows?user=${user?.id}`,
-                                method: 'GET',
-                            })
-                            .then((datas) => {
-                                setBrands({
-                                    fields: fields.data,
-                                    datas: datas.data,
-                                });
+    const getBrands = (user: any) => {
+        const {endpoint, organizationId, projectId} = client.project.config;
+        if (user) {
+            client.project.axios
+                .request<{data: ProjectSchema['brandsPerUser']['read']}>({
+                    baseURL: endpoint,
+                    url: `/${projectId}/brandsPerUser/fields`,
+                    method: 'GET',
+                })
+                .then((fields) => {
+                    client.project.axios
+                        .request<{data: ProjectSchema['brandsPerUser']['read']}>({
+                            baseURL: endpoint,
+                            url: `/${projectId}/brandsPerUser/rows?user=${user?.id}`,
+                            method: 'GET',
+                        })
+                        .then((datas) => {
+                            setBrands({
+                                fields: fields.data,
+                                datas: datas.data,
                             });
-                    });
-            }
-        });
+                        });
+                });
+        }
 
         return brands;
     };
 
     const currentUser = useCurrentUser();
-    const brands = getBrands(currentUser);
+
+    React.useEffect(() => {
+        getBrands(currentUser);
+    }, [currentUser]);
 
     return (
         <>
