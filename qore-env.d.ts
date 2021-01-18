@@ -240,6 +240,24 @@ declare module "@feedloop/qore-client" {
     actions: {};
   };
 
+  type AllStoresWithParamViewRow = {
+    read: {
+      id: string;
+      name: string;
+      description: string;
+      brand: BrandTableRow;
+    };
+    write: {
+      name: string;
+      description: string;
+      brand: string[];
+    };
+    params: {
+      brand: string;
+    };
+    actions: {};
+  };
+
   interface ProjectSchema extends QoreSchema {
     brandsDefaultView: BrandsDefaultViewViewRow;
     memberDefaultView: MemberDefaultViewViewRow;
@@ -251,5 +269,6 @@ declare module "@feedloop/qore-client" {
     experienceResponsesDefaultView: ExperienceResponsesDefaultViewViewRow;
     brandsPerUser: BrandsPerUserViewRow;
     allCustomers: AllCustomersViewRow;
+    allStoresWithParam: AllStoresWithParamViewRow;
   }
 }

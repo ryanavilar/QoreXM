@@ -1,11 +1,17 @@
 import {useState, Fragment} from 'react';
 import {Listbox} from '@headlessui/react';
+import {SELECTION_ALL} from 'antd/lib/table/hooks/useSelection';
 
-export default function List(props: {label: string; data: any; value: any; display: string}) {
-    const [selectedData, setSelectedData] = useState(props.data.nodes[0]);
-
+export default function List(props: {
+    label: string;
+    data: any;
+    value: any;
+    display: string;
+    changeHandler: any;
+    selectedData: any;
+}) {
     return (
-        <Listbox value={selectedData} onChange={setSelectedData}>
+        <Listbox value={props.selectedData} onChange={props.changeHandler}>
             <label id="listbox-label" className="block text-sm font-medium text-gray-700">
                 {props.label}
             </label>
@@ -16,7 +22,7 @@ export default function List(props: {label: string; data: any; value: any; displ
                     aria-labelledby="listbox-label"
                     className="bg-white relative w-full border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
-                    <span className="block truncate">{selectedData.name}</span>
+                    <span className="block truncate">{props.selectedData[props.display]}</span>
                     <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                         {/* Heroicon name: selector */}
                         <svg
@@ -45,7 +51,7 @@ export default function List(props: {label: string; data: any; value: any; displ
                         /* Use the `selected` state to conditionally style the selected option. */
                         <Listbox.Option as={Fragment} key={entity.id} value={entity}>
                             {({active, selected}) => {
-                                selected = selectedData[props.value] === entity[props.value];
+                                selected = props.selectedData[props.value] === entity[props.value];
                                 return (
                                     <li
                                         id="listbox-option-0"
@@ -71,9 +77,9 @@ export default function List(props: {label: string; data: any; value: any; displ
                                                     aria-hidden="true"
                                                 >
                                                     <path
-                                                        fill-rule="evenodd"
+                                                        fillRule="evenodd"
                                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                        clip-rule="evenodd"
+                                                        clipRule="evenodd"
                                                     />
                                                 </svg>
                                             </span>

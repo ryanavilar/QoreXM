@@ -64,6 +64,41 @@ export default function Table(props: {data?: any}) {
                                                                     </td>
                                                                 );
                                                             } else {
+                                                                if (data[keyName]) {
+                                                                    if (data[keyName].nodes) {
+                                                                        {
+                                                                            return (
+                                                                                <td
+                                                                                    key={keyName + data.id}
+                                                                                    className="group-hover:text-white px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                                                                >
+                                                                                    {data[keyName].nodes.map(
+                                                                                        (indata: any) => {
+                                                                                            return (
+                                                                                                <span className="mr-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800">
+                                                                                                    {indata.displayField ||
+                                                                                                        indata}
+                                                                                                </span>
+                                                                                            );
+                                                                                        }
+                                                                                    )}
+                                                                                </td>
+                                                                            );
+                                                                        }
+                                                                    }
+                                                                    if (data[keyName].displayField) {
+                                                                        return (
+                                                                            <td
+                                                                                key={keyName + data.id}
+                                                                                className="group-hover:text-white px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                                                                            >
+                                                                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800">
+                                                                                    {data[keyName].displayField}
+                                                                                </span>
+                                                                            </td>
+                                                                        );
+                                                                    }
+                                                                }
                                                                 return (
                                                                     <td
                                                                         key={keyName + data.id}

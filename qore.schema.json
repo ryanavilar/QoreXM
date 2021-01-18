@@ -752,6 +752,43 @@
         }
       ],
       "design": null
+    },
+    {
+      "id": "allStoresWithParam",
+      "name": "All Stores with Param",
+      "tableId": "stores",
+      "parameters": [{ "slug": "brand", "type": "text", "required": true }],
+      "sorts": [],
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "deletionProtection": false,
+          "id": "name",
+          "displayField": true,
+          "design": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "deletionProtection": false,
+          "id": "description",
+          "displayField": false,
+          "design": null
+        },
+        {
+          "name": "brand",
+          "type": "relation",
+          "deletionProtection": false,
+          "id": "brand",
+          "table": "brands",
+          "column": "stores",
+          "multiple": false,
+          "displayField": false,
+          "design": null
+        }
+      ],
+      "design": null
     }
   ]
 }
