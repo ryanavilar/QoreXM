@@ -11,7 +11,7 @@ export default async function register(
   console.log(process.env.PARTICIPANT_ROLE_ID)
   await client.project.axios.post(
     "/memberDefaultView/rows",
-    { email, password},
+    { email, password, role: [process.env.PARTICIPANT_ROLE_ID] },
     { headers: { "x-api-key": process.env.PROJECT_API_KEY } }
   );
   return res.json({ ok: true });
