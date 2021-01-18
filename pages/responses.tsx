@@ -9,47 +9,50 @@ import LoggedIn from '../layouts/loggedin';
 import {client} from '../qoreContext';
 
 export default function Responses() {
-    const people = [
-        {id: 1, name: 'Durward Reynolds'},
-        {id: 2, name: 'Kenton Towne'},
-        {id: 3, name: 'Therese Wunsch'},
-        {id: 4, name: 'Benedict Kessler'},
-        {id: 5, name: 'Katelyn Rohan'},
-    ];
-
+    const [selectedData, setSelectedData] = React.useState<any>();
     const [brands, setBrands] = React.useState<any>();
     const [resps, setResps] = React.useState<any>();
     const currentUser = useCurrentUser();
+
+    const changeHandler = (value: any) => {
+        setSelectedData(value);
+    };
 
     const getBrands = (user: any) => {
         const {endpoint, organizationId, projectId} = client.project.config;
         if (user) {
             client.project.axios
-                .request<{data: ProjectSchema['brandsPerUser']['read']}>({
+                .request({
                     baseURL: endpoint,
                     url: `/${projectId}/brandsPerUser/rows?user=${user?.id}`,
                     method: 'GET',
                 })
-                .then((datas) => setBrands(datas.data));
+                .then((datas) => {
+                    setBrands(datas.data);
+
+                    if (datas.data.nodes) {
+                        setSelectedData(datas.data.nodes[0]);
+                    }
+                });
         }
 
         return brands;
     };
 
-    const getResponses = (user: any) => {
+    const getResponses = () => {
         const {endpoint, organizationId, projectId} = client.project.config;
-        if (user) {
+        if (selectedData) {
             client.project.axios
-                .request<{data: ProjectSchema['responsesDefaultView']['read']}>({
+                .request({
                     baseURL: endpoint,
-                    url: `/${projectId}/responsesDefaultView/fields`,
+                    url: `/${projectId}/responsesWithParam/fields`,
                     method: 'GET',
                 })
                 .then((fields) => {
                     client.project.axios
-                        .request<{data: ProjectSchema['responsesDefaultView']['read']}>({
+                        .request({
                             baseURL: endpoint,
-                            url: `/${projectId}/responsesDefaultView/rows`,
+                            url: `/${projectId}/responsesWithParam/rows?brand=${selectedData.name}`,
                             method: 'GET',
                         })
                         .then((datas) => {
@@ -65,9 +68,12 @@ export default function Responses() {
     };
 
     React.useEffect(() => {
-        getResponses(currentUser);
         getBrands(currentUser);
     }, [currentUser]);
+
+    React.useEffect(() => {
+        getResponses();
+    }, [selectedData]);
     return (
         <>
             <LoggedIn
@@ -81,8 +87,15 @@ export default function Responses() {
                         </div>
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <div className="py-4">
-                                {brands ? (
-                                    <List label="Choose Brand" data={brands} value={'id'} display={'name'} />
+                                {brands && selectedData ? (
+                                    <List
+                                        changeHandler={changeHandler}
+                                        selectedData={selectedData}
+                                        label="Choose Brand"
+                                        data={brands}
+                                        value={'id'}
+                                        display={'name'}
+                                    />
                                 ) : (
                                     <Skeleton.Input className="w-40 h-2" active={true} size={'small'} />
                                 )}
