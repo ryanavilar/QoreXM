@@ -8,6 +8,7 @@ import axios from 'axios';
 
 export default function Register() {
     const form = useForm<{
+        name: string;
         email: string;
         password: string;
         confirmPassword: string;
@@ -21,10 +22,10 @@ export default function Register() {
     }>({status: 'idle'});
     const router = useRouter();
     const handleSubmit = React.useCallback(async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const {email, password} = form.getValues();
+        const {email, password, name} = form.getValues();
         setState({status: 'loading'});
         try {
-            await axios.post('/api/register', {email, password});
+            await axios.post('/api/register', {email, password, name});
             message.success('Registered, please login');
             router.push('/login', '/login');
         } catch (error) {
@@ -42,6 +43,16 @@ export default function Register() {
             <Card>
                 <Typography.Title level={4}>Register</Typography.Title>
                 <Form layout="vertical">
+                    <Form.Item label="Name">
+                        <Controller
+                            name="name"
+                            control={form.control}
+                            rules={{required: true}}
+                            render={({value, onChange}) => (
+                                <Input onChange={onChange} placeholder="Name here" value={value} />
+                            )}
+                        />
+                    </Form.Item>
                     <Form.Item label="Email">
                         <Controller
                             name="email"

@@ -6,12 +6,10 @@ export default async function register(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, password } = req.body;
-  console.log(process.env.PROJECT_API_KEY)
-  console.log(process.env.PARTICIPANT_ROLE_ID)
+  const { email, password, name } = req.body;
   await client.project.axios.post(
     "/memberDefaultView/rows",
-    { email, password, role: [process.env.PARTICIPANT_ROLE_ID] },
+    { email, password, name, role: ["iRZpk4RR7fVMggE"] },
     { headers: { "x-api-key": process.env.PROJECT_API_KEY } }
   );
   return res.json({ ok: true });
