@@ -3,6 +3,7 @@ import {Skeleton} from 'antd';
 import useCurrentUser from '../components/auth';
 import {ProjectSchema} from '@feedloop/qore-client';
 import List from '../components/list';
+import ButtonModal from '../components/buttonmodal';
 import Loading from '../components/loading';
 import Table from '../components/table';
 import LoggedIn from '../layouts/loggedin';
@@ -89,6 +90,9 @@ export default function Store() {
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <div className="py-4">
                                 <div>
+                                    <div className="pb-3">
+                                        <ButtonModal label={'Add Stores'} title={'Add Stores'} content={<></>} />
+                                    </div>
                                     {brands && selectedData ? (
                                         <List
                                             changeHandler={changeHandler}

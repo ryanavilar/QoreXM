@@ -1,4 +1,4 @@
-export default function Table(props: {data?: any}) {
+export default function Table(props: {data?: any; rowClick?: any}) {
     let datas = [];
     let fields: any[] = [];
 
@@ -52,6 +52,9 @@ export default function Table(props: {data?: any}) {
                                                     <tr
                                                         className="group hover:bg-indigo-600 cursor-pointer bg-white"
                                                         key={data.id}
+                                                        onClick={() => {
+                                                            props.rowClick(data);
+                                                        }}
                                                     >
                                                         {fields.map((keyName: any) => {
                                                             if (typeof data[keyName] == 'string') {
@@ -75,7 +78,14 @@ export default function Table(props: {data?: any}) {
                                                                                     {data[keyName].nodes.map(
                                                                                         (indata: any) => {
                                                                                             return (
-                                                                                                <span className="mr-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800">
+                                                                                                <span
+                                                                                                    key={
+                                                                                                        keyName +
+                                                                                                        (indata.id ||
+                                                                                                            indata)
+                                                                                                    }
+                                                                                                    className="mr-1 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800"
+                                                                                                >
                                                                                                     {indata.displayField ||
                                                                                                         indata}
                                                                                                 </span>

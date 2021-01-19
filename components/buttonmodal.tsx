@@ -1,7 +1,13 @@
 import React from 'react';
 import {Button, Modal} from 'antd';
 
-export default function ButtonModal(props?: {handleCancel?: any; handleOk?: any}) {
+export default function ButtonModal(props?: {
+    title: string;
+    label: string;
+    content: any;
+    handleCancel?: any;
+    handleOk?: any;
+}) {
     const [isModalOpen, setModalOpen] = React.useState(false);
     let handleOk = props?.handleOk;
     let handleCancel = props?.handleCancel;
@@ -25,15 +31,11 @@ export default function ButtonModal(props?: {handleCancel?: any; handleOk?: any}
     return (
         <>
             <Button className="rounded-md from-blue-600" type="primary" onClick={showModal}>
-                Open Modal
+                {props?.label}
             </Button>
 
-            <Modal visible={isModalOpen} title="Title" onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal visible={isModalOpen} title={props?.title} onOk={handleOk} onCancel={handleCancel}>
+                {props?.content}
             </Modal>
         </>
     );
