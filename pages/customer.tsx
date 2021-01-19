@@ -39,23 +39,24 @@ export default function Customer() {
         return brands;
     };
 
-    const getCustomers = (user: any) => {
+    const getCustomers = () => {
         const {endpoint, organizationId, projectId} = client.project.config;
-        if (user) {
+        if (selectedData) {
             client.project.axios
                 .request({
                     baseURL: endpoint,
-                    url: `/${projectId}/allCustomers/fields`,
+                    url: `/${projectId}/customerLoyalBrandParam/fields`,
                     method: 'GET',
                 })
                 .then((fields) => {
                     client.project.axios
                         .request({
                             baseURL: endpoint,
-                            url: `/${projectId}/allCustomers/rows`,
+                            url: `/${projectId}/customerLoyalBrandParam/rows?loyalBrand=${selectedData.name}`,
                             method: 'GET',
                         })
                         .then((datas) => {
+                            console.log(datas);
                             setCustomers({
                                 fields: fields.data,
                                 datas: datas.data,
@@ -69,8 +70,11 @@ export default function Customer() {
 
     React.useEffect(() => {
         getBrands(currentUser);
-        getCustomers(currentUser);
     }, [currentUser]);
+
+    React.useEffect(() => {
+        getCustomers();
+    }, [selectedData]);
 
     return (
         <>

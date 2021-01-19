@@ -1,4 +1,5 @@
 import React from 'react';
+import {useRouter} from 'next/router';
 import {ProjectSchema} from '@feedloop/qore-client';
 import useCurrentUser from '../components/auth';
 import Loading from '../components/loading';
@@ -8,8 +9,14 @@ import LoggedIn from '../layouts/loggedin';
 import {client} from '../qoreContext';
 
 export default function Brand() {
+    const router = useRouter();
     const [brands, setBrands] = React.useState<any>();
     const currentUser = useCurrentUser();
+
+    const toBrand = (data: any) => {
+        console.log(data);
+        router.push(`/brands/${data.id}`);
+    };
 
     const getBrands = (user: any) => {
         const {endpoint, organizationId, projectId} = client.project.config;
@@ -56,8 +63,8 @@ export default function Brand() {
                         </div>
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                             <div className="py-4">
-                                <ButtonModal />
-                                {brands ? <Table data={brands} /> : <Loading className="py-5" />}
+                                <ButtonModal label={'Add Brands'} title={'Add Brands'} content={<></>} />
+                                {brands ? <Table data={brands} rowClick={toBrand} /> : <Loading className="py-5" />}
                             </div>
                         </div>
                     </>
