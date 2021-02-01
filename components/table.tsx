@@ -1,4 +1,4 @@
-export default function Table(props: {data?: any; rowClick?: any}) {
+export default function Table(props: {className?: any; data?: any; rowClick?: any}) {
     let datas = [];
     let fields: any[] = [];
 
@@ -26,9 +26,9 @@ export default function Table(props: {data?: any; rowClick?: any}) {
         <div className="py-4">
             <div>
                 <div className="flex flex-col">
-                    <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="-my-2 sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <div className="shadow overflow-hidden border-b border-gray-200 ">
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
@@ -53,7 +53,9 @@ export default function Table(props: {data?: any; rowClick?: any}) {
                                                         className="group hover:bg-indigo-600 cursor-pointer bg-white"
                                                         key={data.id}
                                                         onClick={() => {
-                                                            props.rowClick(data);
+                                                            if (props.rowClick) {
+                                                                props.rowClick(data);
+                                                            }
                                                         }}
                                                     >
                                                         {fields.map((keyName: any) => {

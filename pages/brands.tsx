@@ -14,8 +14,7 @@ export default function Brand() {
     const currentUser = useCurrentUser();
 
     const toBrand = (data: any) => {
-        console.log(data);
-        router.push(`/brands/${data.id}`);
+        router.push(`/brand/${data.id}`);
     };
 
     const getBrands = (user: any) => {

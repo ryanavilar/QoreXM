@@ -4,6 +4,8 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import Navbar from '../components/navbar';
 
+import FacebookPixel from '../components/FacebookPixel';
+
 function MyApp({Component, pageProps}) {
     return (
         <>
@@ -15,7 +17,9 @@ function MyApp({Component, pageProps}) {
                 />
             </Head>
 
-            <Component {...pageProps} />
+            <FacebookPixel>
+                <Component {...pageProps} />
+            </FacebookPixel>
         </>
     );
 }
