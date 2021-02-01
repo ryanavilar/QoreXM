@@ -4,7 +4,7 @@ import '../styles/globals.css';
 import Head from 'next/head';
 import Navbar from '../components/navbar';
 
-import FacebookPixel from '../components/FacebookPixel';
+import FacebookPixel from '../components/facebookpixel';
 
 function MyApp({Component, pageProps}) {
     return (
