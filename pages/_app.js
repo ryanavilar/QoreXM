@@ -2,9 +2,9 @@ import 'antd/dist/antd.css';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 import Head from 'next/head';
-import Navbar from '../components/navbar';
 
-import FacebookPixel from '../components/facebookpixel';
+import FacebookPixel from '../components/fbpixel';
+import Navbar from '../components/navbar';
 
 function MyApp({Component, pageProps}) {
     return (
