@@ -6,7 +6,7 @@ const handleRouteChange = () => {
     fbq.pageview();
 };
 
-const FacebookPixel = ({children}) => {
+const FacebookPixel = ({children} : any) => {
     const router = useRouter();
 
     useEffect(() => {
